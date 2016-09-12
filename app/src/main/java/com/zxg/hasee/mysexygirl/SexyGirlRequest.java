@@ -3,6 +3,7 @@ package com.zxg.hasee.mysexygirl;
 
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Cache;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
@@ -11,6 +12,9 @@ import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonRequest;
 import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /** 
  * ClassName:SmartBeiJingRequest <br/> 
@@ -50,5 +54,12 @@ public class SexyGirlRequest<T> extends JsonRequest<T> {
         return null;
     }
 
+    @Override
+    public Map<String, String> getHeaders() throws AuthFailureError {
+        HashMap<String,String> hashMap = new HashMap<>();
+        hashMap.put("apikey","aee9c27b9a8f5617748bb5fde6c160bf");
+
+        return hashMap;
+    }
 }
   
