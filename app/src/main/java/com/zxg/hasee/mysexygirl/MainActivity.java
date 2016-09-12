@@ -13,11 +13,13 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,10 +77,17 @@ public class MainActivity extends AppCompatActivity {
                 convertView = LayoutInflater.from(MainActivity.this).inflate(R.layout.list_item, null);
                 mViewHolder = new ViewHolder(convertView);
                 convertView.setTag(mViewHolder);
-            }else {
+            } else {
                 mViewHolder = (ViewHolder) convertView.getTag();
             }
-                mViewHolder.mTextView.setText(mListData.get(position).getTitle());
+            SexyGirlBean.NewslistBean data = mListData.get(position);
+            //标题
+            mViewHolder.mTextView.setText(mListData.get(position).getTitle());
+            //刷新图片
+            Glide.with(MainActivity.this).load(data.getPicUrl())
+                    .bitmapTransform(/*new BlurTransformation(MainActivity.this),*/
+                            new CropCircleTransformation(MainActivity.this))
+                    .into(mViewHolder.mImageView);
             return convertView;
         }
     };
@@ -90,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public  class ViewHolder {
+    public class ViewHolder {
         /* ImageView mImageView;
          TextView mTextView;
          public ViewHolder(View root){
@@ -98,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
              mTextView = (TextView) root.findViewById(R.id.list_textview);
          }*/
         @BindView(R.id.list_image)
-        public  ImageView mImageView;
+        public ImageView mImageView;
         @BindView(R.id.list_textview)
         TextView mTextView;
 
