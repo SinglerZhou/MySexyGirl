@@ -21,6 +21,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.list_view)
-    public void onClick() {
+    public void onClick() {//点击事件
     }
 }
